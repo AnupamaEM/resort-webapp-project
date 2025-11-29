@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import heroImage from '@/assets/hero-resort.jpg';
+import { useBookingModal } from '@/hooks/use-booking-modal';
 
 const HeroSection = () => {
   const [scrollY, setScrollY] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const { openModal } = useBookingModal();
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -81,7 +83,11 @@ const HeroSection = () => {
         </p>
 
         <div className="animate-fade-up mt-10 flex flex-col items-center gap-4 sm:flex-row" style={{ animationDelay: '0.3s' }}>
-          <button className="group relative overflow-hidden rounded-full bg-gold px-10 py-4 text-sm font-semibold uppercase tracking-widest text-charcoal transition-all duration-500 hover:shadow-glow-gold">
+          <button
+            className="group relative overflow-hidden rounded-full bg-gold px-10 py-4 text-sm font-semibold uppercase tracking-widest text-charcoal transition-all duration-500 hover:shadow-glow-gold"
+            onClick={openModal}
+            type="button"
+          >
             <span className="relative z-10">Book Your Escape</span>
             <div className="absolute inset-0 -translate-x-full bg-gold-light transition-transform duration-500 group-hover:translate-x-0" />
           </button>

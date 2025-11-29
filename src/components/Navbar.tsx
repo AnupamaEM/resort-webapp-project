@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { useBookingModal } from '@/hooks/use-booking-modal';
 
 const navLinks = [
   { label: 'Experiences', href: '#services' },
@@ -11,6 +13,7 @@ const navLinks = [
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { openModal } = useBookingModal();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,7 +49,17 @@ const Navbar = () => {
               {link.label}
             </a>
           ))}
-          <button className="rounded-full border border-gold bg-transparent px-6 py-2 text-sm font-semibold uppercase tracking-wider text-gold transition-all duration-300 hover:bg-gold hover:text-charcoal">
+          <Link
+            to="/admin"
+            className="text-sm font-medium uppercase tracking-widest text-cream/70 transition-colors hover:text-gold"
+          >
+            Admin
+          </Link>
+          <button
+            className="rounded-full border border-gold bg-transparent px-6 py-2 text-sm font-semibold uppercase tracking-wider text-gold transition-all duration-300 hover:bg-gold hover:text-charcoal"
+            onClick={openModal}
+            type="button"
+          >
             Reserve
           </button>
         </nav>
@@ -77,7 +90,21 @@ const Navbar = () => {
               {link.label}
             </a>
           ))}
-          <button className="mt-4 rounded-full bg-gold px-6 py-3 text-sm font-semibold uppercase tracking-wider text-charcoal">
+          <Link
+            to="/admin"
+            className="text-lg font-medium text-cream/70 transition-colors hover:text-gold"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Admin
+          </Link>
+          <button
+            className="mt-4 rounded-full bg-gold px-6 py-3 text-sm font-semibold uppercase tracking-wider text-charcoal"
+            onClick={() => {
+              openModal();
+              setIsMobileMenuOpen(false);
+            }}
+            type="button"
+          >
             Reserve Now
           </button>
         </nav>
