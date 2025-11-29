@@ -7,6 +7,9 @@ export default defineConfig(() => ({
     host: "::",
     port: 8080,
   },
+  build: {
+    outDir: "build",
+  },
   plugins: [react()],
   resolve: {
     alias: {
